@@ -103,7 +103,7 @@ module Amazon
     def self.item_lookup(item_id, opts = {})
       opts[:operation] = 'ItemLookup'
       opts[:item_id] = item_id
-      
+      puts "hi easymo0de!, good test!"
       self.send_request(opts)
     end    
 
