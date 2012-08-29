@@ -108,8 +108,11 @@ module Amazon
     end   
     
     # Lookup Multiple items by ASIN no. through batch request
-    def self.item_lookup(item_id, opts = {})
+    def self.items_lookup(item_ids, opts = {})
       opts[:operation] = 'ItemLookup'
+      item_ids.each_with_index do |item_id, i|
+       attribute_name = "ItemLookup." + i.to_s + "."
+      end
       opts[:item_id] = item_id
       #puts "hi easymo0de!, good test!"
       self.send_request(opts)
@@ -246,6 +249,8 @@ module Amazon
         opts = opts.sort do |c,d| 
           c[0].to_s <=> d[0].to_s
         end
+        
+        puts "easym0de:: opts: #{opts.inspect}"
         
         opts.each do |e| 
           log "Adding #{e[0]}=#{e[1]}"
