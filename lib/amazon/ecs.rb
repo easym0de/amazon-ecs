@@ -103,9 +103,17 @@ module Amazon
     def self.item_lookup(item_id, opts = {})
       opts[:operation] = 'ItemLookup'
       opts[:item_id] = item_id
-      puts "hi easymo0de!, good test!"
+      #puts "hi easymo0de!, good test!"
       self.send_request(opts)
-    end    
+    end   
+    
+    # Lookup Multiple items by ASIN no. through batch request
+    def self.item_lookup(item_id, opts = {})
+      opts[:operation] = 'ItemLookup'
+      opts[:item_id] = item_id
+      #puts "hi easymo0de!, good test!"
+      self.send_request(opts)
+    end 
 
     # Search a browse node by BrowseNodeId
     def self.browse_node_lookup(browse_node_id, opts = {})
@@ -124,6 +132,7 @@ module Amazon
 
       request_url = prepare_url(opts)
       log "Request URL: #{request_url}"
+      puts "Request URL:: #{request_url}"
       
       res = Net::HTTP.get_response(URI::parse(request_url))
       unless res.kind_of? Net::HTTPSuccess
