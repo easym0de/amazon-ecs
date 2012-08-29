@@ -111,7 +111,7 @@ module Amazon
     def self.items_lookup(item_ids, opts = {})
       opts[:operation] = 'ItemLookup'
       item_ids.split(',').each_with_index do |item_id, i|
-       attribute_name = ":ItemLookup." + i.to_s + ".item_id"
+       attribute_name = "ItemLookup." + (i+1).to_s + ".ItemId"
        opts[attribute_name] = item_id
       end
       #opts[:item_id] = item_id
