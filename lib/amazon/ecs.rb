@@ -138,7 +138,13 @@ module Amazon
       log "Request URL: #{request_url}"
       puts "Request URL:: #{request_url}"
       
-      res = Net::HTTP.get_response(URI::parse(request_url))
+      if opts[:proxy].blank?
+        res = Net::HTTP.get_response(URI::parse(request_url))
+      else
+        res = Net::HTTP::Proxy(opts[:proxy],80).get_response(URI::parse(request_url))
+      end
+      
+      
       unless res.kind_of? Net::HTTPSuccess
         raise Amazon::RequestError, "HTTP Response: #{res.code} #{res.message}"
       end
