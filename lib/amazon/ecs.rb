@@ -110,10 +110,11 @@ module Amazon
     # Lookup Multiple items by ASIN no. through batch request
     def self.items_lookup(item_ids, opts = {})
       opts[:operation] = 'ItemLookup'
-      item_ids.each_with_index do |item_id, i|
-       attribute_name = "ItemLookup." + i.to_s + "."
+      item_ids.split(',').each_with_index do |item_id, i|
+       attribute_name = ":ItemLookup." + i.to_s + ".item_id"
+       opts[attribute_name] = item_id
       end
-      opts[:item_id] = item_id
+      #opts[:item_id] = item_id
       #puts "hi easymo0de!, good test!"
       self.send_request(opts)
     end 
